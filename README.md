@@ -15,6 +15,9 @@ and the requirements in the [server configuration](https://github.com/be-ys/dory
 2. `export VUE_APP_BACKEND=https://your_backend_address/`
 3. `npm install && npm run serve`
 
+In some cases, you may encounter an `ERR_OSSL_EVP_UNSUPPORTED`. The workaround is to enable legacy 
+provider for openssl : `export NODE_OPTIONS=--openssl-legacy-provider`
+
 # Run (for large-scale production)
 
 As you noticed, our Docker image and the precedent method for manual-run is not quite efficient : we
