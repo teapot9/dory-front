@@ -1,0 +1,17 @@
+html {
+    background-image: url("/images/egg.jpg");
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
+}
+
+body {
+    background: none;
+}
+
+
+.jumbotron {
+    opacity: 0.8
+}

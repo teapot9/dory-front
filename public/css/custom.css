@@ -1,0 +1,71 @@
+.login-logo {
+    margin: 45px auto;
+    text-align: center;
+}
+
+.container {
+    max-width: 90%;
+}
+
+input, select {
+    margin: 10px 0 !important;
+}
+
+button[type="submit"] {
+    width: 100%;
+}
+
+.awn-toast-container, #awn-toast-container {
+    width: 35%;
+    min-width: 300px;
+}
+
+.awn-toast {
+    width: 100%;
+}
+
+.logo {
+    background: url("/images/logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+
+.project-selector {
+    margin-top:20px;
+}
+
+body, .btn, .custom-select {
+    font-size: 0.9rem;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+#konami {
+    display: none;
+}
+
+
+.btn-primary {
+    background: #009f4d;
+    border-color: #009f4d;
+}
+
+.btn-primary.disabled {
+    background: #009f4d;
+    border-color: #009f4d;
+}
+
+.bg-primary {
+    background: #012f2d !important;
+}
+
+
+
+.close {
+    background: none;
+    border: none;
+    font-size: 20px;
+}
