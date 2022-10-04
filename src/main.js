@@ -14,7 +14,9 @@ import KonamiCode from 'vue-konami-code'
 
 import messages from './languages/messages.js'
 import dateTimeFormats from "./languages/dateFormat";
+import CountryFlag from 'vue-country-flag'
 
+Vue.component('country-flag', CountryFlag)
 
 //i18n
 Vue.use(VueI18n);
@@ -40,9 +42,9 @@ Vue.use(KonamiCode, {callback: function () {
 let notifier = {
     durations: {global:6000},
     labels:{
-        success: messages['fr'].toaster.success,
-        warning: messages['fr'].toaster.warning,
-        alert: messages['fr'].toaster.error
+        success: messages[i18n.locale].toaster.success,
+        warning: messages[i18n.locale].toaster.warning,
+        alert: messages[i18n.locale].toaster.error
     }
 };
 

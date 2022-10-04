@@ -33,7 +33,7 @@ const messages = {
         "modal": {
             "cancel": "Annuler",
             "send": "Envoyer",
-            "respect_password_info": "<b>Pensez à respecter les règles du serveur Active Directory</b> : 12 caractères, avec au moins une majuscule, une minuscule, un chiffre, et un caractère spécial.",
+            "respect_password_info": "<b>Rappel</b> : Pensez à respecter les règles de sécurité de votre organisation.",
             "input": {
                 "username": "Nom d'utilisateur : ",
                 "old_password":"Ancien mot de passe : ",
@@ -51,6 +51,60 @@ const messages = {
             "reinitialized":"Le mot de passe a bien été réinitialisé.",
             "error_on_reinitialization":"Erreur lors de la réinitialisation du mot de passe.",
             "title": "Réinitialiser un mot de passe"
+        }
+    },
+    en: {
+        "toaster": {
+            "success": "Success",
+            "warning": "Warning",
+            "error": "Error"
+        },
+        "footer": {
+            "about": "Copyright (c) 2021 - Crafted with 🥜 and 💚 by the be ys Cloud Team"
+        },
+        "landing": {
+            "info_new_users": "<b>New and expired users:</b> Please use the password reinitialization procedure.",
+            "unlock": "Unlock my account",
+            "change": "Update my password",
+            "reset": "Reinitialize my password",
+            "disabled_unlock": "Account unlocking is not available for OpenLDAP servers.",
+            "unlock_modal": {
+                "request_sent": "An email is on the way! Please check your mailbox.",
+                "request_error": "Sorry, an error occurred.",
+                "title": "Unlock my account"
+            },
+            "reset_modal": {
+                "request_sent": "An email is on the way! Please check your mailbox.",
+                "request_error": "Sorry, an error occurred.",
+                "title": "Reinitialize my password"
+            },
+            "change_modal": {
+                "request_sent": "You password has been changed.",
+                "request_error": "An error occurred. Do you respect the security policy of your organization?",
+                "title": "Change my password"
+            }
+        },
+        "modal": {
+            "cancel": "Cancel",
+            "send": "Send",
+            "respect_password_info": "<b>Remember</b>: You must respect the policy security enforced by your IT Team.",
+            "input": {
+                "username": "Username:",
+                "old_password":"Old password:",
+                "new_password":"New password:",
+                "new_password_repeat":"New password (again):"
+            }
+        },
+        "unlock": {
+            "ongoing_title": "Unlocking in progress, hold on...",
+            "bad_link":"The link is invalid, or has expired.",
+            "unlocked":"The account has been unlocked; you can now log in.",
+            "error_on_unlock": "An error occurred while unlocking."
+        },
+        "reinitialize": {
+            "reinitialized":"The password have been reinitialized.",
+            "error_on_reinitialization":"An error occurred while reinitializing your password.",
+            "title": "Reinitialize a password"
         }
     }
 };

@@ -1,6 +1,9 @@
 <script>
+import toaster from "@/components/mixins/toaster";
+
 export default {
   props: ['method'],
+  mixins: [toaster],
 
   data() {
     return {
@@ -30,11 +33,11 @@ export default {
 
       this.axios.post(process.env.VUE_APP_BACKEND+ "/"+request, this.form)
           .then(() => {
-            this.$awn.success(this.$t("landing."+this.$props.method+"_modal.request_sent"));
+            this.$awn.success(this.$t("landing."+this.$props.method+"_modal.request_sent"), this.toasterLabels);
             this.show=false;
           })
           .catch(() => {
-            this.$awn.alert(this.$t("landing."+this.$props.method+"_modal.request_error"));
+            this.$awn.alert(this.$t("landing."+this.$props.method+"_modal.request_error"), this.toasterLabels);
           })
           .finally(() => {
             this.isDisabled=false

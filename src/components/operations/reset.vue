@@ -1,5 +1,8 @@
 <script>
+import toaster from "@/components/mixins/toaster";
+
 export default {
+  mixins: [toaster],
   name: "unlock",
 
   data(){
@@ -16,7 +19,7 @@ export default {
 
   mounted() {
     if (this.form.token === "" && (this.$route.query.user === undefined || this.$route.query.token === undefined)) {
-      this.$awn.alert(this.$t("unlock.bad_link"));
+      this.$awn.alert(this.$t("unlock.bad_link"), this.toasterLabels);
       this.$router.push("/")
     } else {
       this.form.username = this.$route.query.user
@@ -30,11 +33,11 @@ export default {
       this.loading = true;
       this.axios.post(process.env.VUE_APP_BACKEND + "/reinitialize", this.form)
           .then(() => {
-            this.$awn.success(this.$t("reinitialize.reinitialized"));
+            this.$awn.success(this.$t("reinitialize.reinitialized"), this.toasterLabels);
             this.$router.push("/")
           })
           .catch(() => {
-            this.$awn.alert(this.$t("reinitialize.error_on_reinitialization"));
+            this.$awn.alert(this.$t("reinitialize.error_on_reinitialization"), this.toasterLabels);
           })
       .finally(() => {
         this.loading=false;

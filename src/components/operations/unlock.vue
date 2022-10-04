@@ -1,10 +1,13 @@
 <script>
+import toaster from "@/components/mixins/toaster";
+
 export default {
+  mixins: [toaster],
   name: "unlock",
 
   mounted() {
     if (this.$route.query.user === undefined || this.$route.query.token === undefined) {
-      this.$awn.alert(this.$t("unlock.bad_link"));
+      this.$awn.alert(this.$t("unlock.bad_link"), this.toasterLabels);
       this.$router.push("/")
     } else {
       this.unlockUser(this.$route.query.user, this.$route.query.token)
@@ -21,10 +24,10 @@ export default {
 
       this.axios.post(process.env.VUE_APP_BACKEND + "/unlock", form)
           .then(() => {
-            this.$awn.success(this.$t("unlock.unlocked"));
+            this.$awn.success(this.$t("unlock.unlocked"), this.toasterLabels);
           })
           .catch(() => {
-            this.$awn.alert(this.$t("unlock.error_on_unlock"));
+            this.$awn.alert(this.$t("unlock.error_on_unlock"), this.toasterLabels);
           })
           .finally(() => {
             this.$router.push("/")
