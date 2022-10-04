@@ -17,9 +17,11 @@
     "vue": "^2.6.14",
     "vue-awesome-notifications": "^3.1.1",
     "vue-axios": "^3.4.0",
+    "vue-country-flag": "^2.3.2",
     "vue-i18n": "^8.26.7",
     "vue-konami-code": "^1.0.0",
-    "vue-router": "^3.5.3"
+    "vue-router": "^3.5.3",
+    "vue-switch-lang": "^0.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.15",

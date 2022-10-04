@@ -1,6 +1,10 @@
 <script>
+import toaster from "@/components/mixins/toaster";
+
 export default {
+  mixins: [toaster],
   data() {
+
     return {
       form: {
         username: "",
@@ -30,11 +34,11 @@ export default {
 
       this.axios.post(process.env.VUE_APP_BACKEND+ "/change_password", this.form)
           .then(() => {
-            this.$awn.success(this.$t("landing.change_modal.request_sent"));
+            this.$awn.success(this.$t("landing.change_modal.request_sent"), this.toasterLabels);
             this.show=false;
           })
           .catch(() => {
-            this.$awn.alert(this.$t("landing.change_modal.request_error"));
+            this.$awn.alert(this.$t("landing.change_modal.request_error"), this.toasterLabels);
           })
           .finally(() => {
             this.isDisabled=false
