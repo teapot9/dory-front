@@ -14,6 +14,14 @@ export default {
     changePassword() {
       this.$refs.change.display()
     }
+  },
+  computed: {
+    isOpenLDAP() {
+      if (process.env.VUE_APP_OPENLDAP === undefined) {
+        return false;
+      }
+      return process.env.VUE_APP_OPENLDAP === 'true';
+    }
   }
 }
 </script>
@@ -21,9 +29,10 @@ export default {
 <template>
   <div>
     <div class="landing">
-      <b-jumbotron v-on:click="unlockUser()">
+      <b-jumbotron :id="isOpenLDAP? 'disabled-jumbo': ''" v-on:click="isOpenLDAP ? true :  unlockUser()" :class="isOpenLDAP ? 'no-hover' : ''">
         <i class="fas fa-unlock-alt"></i>
         <h1>{{ $t('landing.unlock') }}</h1>
+        <b-tooltip target="disabled-jumbo">{{ $t('landing.disabled_unlock') }}</b-tooltip>
       </b-jumbotron>
       <b-jumbotron v-on:click="changePassword()">
         <i class="fas fa-sync-alt"></i>
@@ -46,6 +55,16 @@ export default {
 
 
 <style scoped>
+
+.jumbotron.no-hover {
+  background: #333;
+  cursor: unset;
+}
+
+.jumbotron.no-hover:hover {
+  background: #333;
+}
+
 .fas {
   font-size: 72px;
 }

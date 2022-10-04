@@ -13,6 +13,7 @@ const messages = {
             "unlock": "Déverrouiller mon compte",
             "change": "Mettre à jour mon mot de passe",
             "reset": "Réinitialiser mon mot de passe",
+            "disabled_unlock": "Le déverrouillage de compte n'est pas disponible sous OpenLDAP.",
             "unlock_modal": {
                 "request_sent": "Votre demande a été traitée. Consultez votre boîte mail.",
                 "request_error": "Une erreur est survenue lors du traitement de votre demande.",
