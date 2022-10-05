@@ -29,11 +29,6 @@ are keeping a node process running, serving our content. This is why we highly r
 The main (and only) drawback is that you cannot set "on the fly" the backend url anymore, you have to define it
 before the build phase. That's why we are not providing such images, even if we're using it in our company.
 
-# OpenLDAP
-
-You can set a `VUE_APP_OPENLDAP` environment variable to `true` to disable the unlock account feature from front, as it
-is currently not supported and specific to Active Directory.
-
 # License
 
 Distributed under MIT license. You will find a copy of the license [here](LICENSE).
