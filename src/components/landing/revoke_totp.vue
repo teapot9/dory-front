@@ -2,16 +2,17 @@
 import toaster from "@/components/mixins/toaster";
 
 export default {
-  props: ['method', 'totp'],
   mixins: [toaster],
-
   data() {
+
     return {
       form: {
         username: "",
+        password: "",
       },
       show: false,
-      isDisabled: false
+      isDisabled: false,
+      repeat: ""
     }
   },
 
@@ -20,24 +21,22 @@ export default {
     display(){
       this.form = {
         username: "",
+        password: "",
       };
+      this.repeat = "";
       this.show=true;
-    },
-
-    useTotp() {
-      this.$router.push("/"+this.$props.method+"?user="+this.form.username+"&totp=true")
     },
 
     sendRequest: function () {
       this.isDisabled = true
 
-      this.axios.post(process.env.VUE_APP_BACKEND+ "/request/"+this.$props.method, this.form)
+      this.axios.post(process.env.VUE_APP_BACKEND+ "/totp/revoke", this.form)
           .then(() => {
-            this.$awn.success(this.$t("landing."+this.$props.method+"_modal.request_sent"), this.toasterLabels);
-            this.show=false;
+            this.$awn.success(this.$t("landing.totp_toaster.revoke"), this.toasterLabels);
+            this.show = false
           })
           .catch(() => {
-            this.$awn.alert(this.$t("landing."+this.$props.method+"_modal.request_error"), this.toasterLabels);
+            this.$awn.alert(this.$t("landing.totp_toaster.error_on_revoke"), this.toasterLabels);
           })
           .finally(() => {
             this.isDisabled=false
@@ -50,9 +49,7 @@ export default {
 
 <template>
   <b-modal id="bv-modal-example" hide-footer v-model="show" size="lg" no-close-on-backdrop>
-    <template v-slot:modal-title>{{$t("landing."+method+"_modal.title")}}</template>
-    <br/>
-
+    <template v-slot:modal-title>{{$t("landing.revoke_totp")}}</template>
     <b-form-group
         id="input-group-1"
         :label="$t('modal.input.username')"
@@ -61,18 +58,26 @@ export default {
           id="input-1"
           class="form-control"
           type="text"
-          ref="termName"
           v-model="form.username"
       />
     </b-form-group>
 
+    <b-form-group
+        id="input-group-2"
+        :label="$t('modal.input.password')"
+        label-for="input-2">
+      <b-form-input
+          id="input-2"
+          class="form-control"
+          type="password"
+          v-model="form.password"
+      />
+    </b-form-group>
 
     <div class="text-right">
       <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')">{{$t("modal.cancel")}}</b-button>
-      <span style="margin-right: 20px;" v-if="totp === true"/>
-      <b-button class="mt-3 btn-info" v-if="totp === true" @click="useTotp()" :disabled="isDisabled || form.username.length === 0">{{$t("modal.use_totp")}}</b-button>
       <span style="margin-right: 20px;"/>
-      <b-button class="mt-3 btn-success" @click="sendRequest()" :disabled="isDisabled || form.username.length === 0">{{$t("modal.send_email")}}</b-button>
+      <b-button class="mt-3 btn-success" @click="sendRequest()" :disabled="isDisabled || form.password.length === 0 || form.username.length === 0">{{$t("modal.send")}}</b-button>
     </div>
   </b-modal>
 </template>
@@ -92,13 +97,4 @@ export default {
 .btn-success:hover {
   background: #012f2d
 }
-
-.btn-info {
-  color: #fff;
-}
-
-.btn-info:hover {
-  background: #012f2d
-}
-
 </style>
