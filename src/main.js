@@ -9,6 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import VueAWN from "vue-awesome-notifications"
 import KonamiCode from 'vue-konami-code'
+import QrcodeVue from 'qrcode.vue'
 
 
 
@@ -17,6 +18,7 @@ import dateTimeFormats from "./languages/dateFormat";
 import CountryFlag from 'vue-country-flag'
 
 Vue.component('country-flag', CountryFlag)
+Vue.component('qrcode-vue', QrcodeVue)
 
 //i18n
 Vue.use(VueI18n);

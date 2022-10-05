@@ -5,12 +5,16 @@ export default {
   mixins: [toaster],
   name: "unlock",
 
-  data(){
+  data() {
     return {
+      totp: false,
       form: {
         new_password: "",
         username: "",
-        token: "",
+        authentication: {
+          token: "",
+          totp: ""
+        }
       },
       repeat: "",
       loading: false
@@ -18,12 +22,13 @@ export default {
   },
 
   mounted() {
-    if (this.form.token === "" && (this.$route.query.user === undefined || this.$route.query.token === undefined)) {
+    if (this.$route.query.user === undefined || (this.$route.query.token === undefined && !this.$route.query.totp)) {
       this.$awn.alert(this.$t("unlock.bad_link"), this.toasterLabels);
       this.$router.push("/")
     } else {
       this.form.username = this.$route.query.user
-      this.form.token = this.$route.query.token
+      this.form.authentication.token = this.$route.query.token === undefined ? "" : this.$route.query.token
+      this.totp = !!this.$route.query.totp
     }
   },
 
@@ -39,9 +44,9 @@ export default {
           .catch(() => {
             this.$awn.alert(this.$t("reinitialize.error_on_reinitialization"), this.toasterLabels);
           })
-      .finally(() => {
-        this.loading=false;
-      })
+          .finally(() => {
+            this.loading = false;
+          })
     }
 
   }
@@ -64,12 +69,12 @@ export default {
             id="input-1"
             class="form-control"
             type="text"
-            disabled
+            :disabled="!totp"
             v-model="form.username"
         />
       </b-form-group>
 
-      <br />
+      <br/>
       <b-form-group
           id="input-group-3"
           :label="$t('modal.input.new_password')"
@@ -81,7 +86,7 @@ export default {
             v-model="form.new_password"
         />
       </b-form-group>
-      <br />
+      <br/>
 
       <b-form-group
           id="input-group-4"
@@ -95,9 +100,38 @@ export default {
             v-model="repeat"
         />
       </b-form-group>
-      <br />
 
-      <b-button type="submit" variant="primary" :disabled="form.new_password.length === 0 || form.new_password !== repeat">{{ $t('modal.send') }}</b-button>
+      <b-form-group v-if="totp"
+                    id="input-group-5"
+                    :label="$t('modal.input.totp')"
+                    label-for="input-5">
+        <b-form-input
+            id="input-5"
+            class="form-control"
+            type="text"
+            placeholder="000000"
+            :state="/^[0-9]{6}$/.test(form.authentication.totp)"
+            v-model="form.authentication.totp"
+        />
+      </b-form-group>
+      <b-form-group v-else
+                    id="input-group-6"
+                    :label="$t('modal.input.security_token')"
+                    label-for="input-6">
+        <b-form-input
+            id="input-6"
+            class="form-control"
+            disabled
+            type="text"
+            v-model="form.authentication.token"
+        />
+      </b-form-group>
+      <br/>
+
+      <b-button type="submit" variant="primary"
+                :disabled="form.new_password.length === 0 || form.new_password !== repeat || (form.authentication.token.length === 0 && form.authentication.totp.length !== 6)">
+        {{ $t('modal.send') }}
+      </b-button>
     </b-form>
     <b-spinner v-else label="Spinning" style="width: 5rem; height: 5rem;" type="grow" variant="success"></b-spinner>
 
