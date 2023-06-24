@@ -2,7 +2,7 @@
 import toaster from "@/components/mixins/toaster";
 
 export default {
-  props: ['method', 'totp'],
+  props: ['method', 'totp', 'password'],
   mixins: [toaster],
 
   data() {
@@ -24,8 +24,12 @@ export default {
       this.show=true;
     },
 
+    usePassword() {
+      this.$router.push("/"+this.$props.method+"?user="+this.form.username+"&type=password")
+    },
+
     useTotp() {
-      this.$router.push("/"+this.$props.method+"?user="+this.form.username+"&totp=true")
+      this.$router.push("/"+this.$props.method+"?user="+this.form.username+"&type=totp")
     },
 
     sendRequest: function () {
@@ -71,6 +75,8 @@ export default {
       <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')">{{$t("modal.cancel")}}</b-button>
       <span style="margin-right: 20px;" v-if="totp === true"/>
       <b-button class="mt-3 btn-info" v-if="totp === true" @click="useTotp()" :disabled="isDisabled || form.username.length === 0">{{$t("modal.use_totp")}}</b-button>
+      <span style="margin-right: 20px;" v-if="password === true"/>
+      <b-button class="mt-3 btn-info" v-if="password === true" @click="usePassword()" :disabled="isDisabled || form.username.length === 0">{{$t("modal.use_password")}}</b-button>
       <span style="margin-right: 20px;"/>
       <b-button class="mt-3 btn-success" @click="sendRequest()" :disabled="isDisabled || form.username.length === 0">{{$t("modal.send_email")}}</b-button>
     </div>

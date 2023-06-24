@@ -4,6 +4,7 @@ import fullLayout from "./components/fullLayout";
 import landing from "./components/landing/landing";
 import unlock from "./components/operations/unlock";
 import reset from "./components/operations/reset";
+import revoke from "./components/operations/revoke_totp";
 
 const router = new Router({
     mode: 'history',
@@ -23,7 +24,11 @@ const router = new Router({
                 {
                     path: 'reinitialize',
                     component: reset
-                }
+                },
+                {
+                    path: 'revoke',
+                    component: revoke
+                },
             ]
         },
     ]

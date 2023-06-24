@@ -8,7 +8,9 @@ export default {
     return {
       form: {
         username: "",
-        password: "",
+        authentication: {
+          password: "",
+        },
       },
       qrcode_data: "",
       show: false,
@@ -22,7 +24,9 @@ export default {
     display(){
       this.form = {
         username: "",
-        password: "",
+        authentication: {
+          password: "",
+        },
       };
       this.repeat = "";
       this.show=true;
@@ -87,14 +91,14 @@ export default {
           id="input-2"
           class="form-control"
           type="password"
-          v-model="form.password"
+          v-model="form.authentication.password"
       />
     </b-form-group>
 
     <div class="text-right">
       <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')">{{$t("modal.cancel")}}</b-button>
       <span style="margin-right: 20px;"/>
-      <b-button class="mt-3 btn-success" @click="sendRequest()" :disabled="isDisabled || form.password.length === 0 || form.username.length === 0">{{$t("modal.send")}}</b-button>
+      <b-button class="mt-3 btn-success" @click="sendRequest()" :disabled="isDisabled || form.authentication.password.length === 0 || form.username.length === 0">{{$t("modal.send")}}</b-button>
     </div>
     </div>
   </b-modal>

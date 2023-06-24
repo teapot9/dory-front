@@ -7,7 +7,7 @@ export default {
 
   data() {
     return {
-      totp: false,
+      type: null,
       form: {
         new_password: "",
         username: "",
@@ -22,13 +22,17 @@ export default {
   },
 
   mounted() {
-    if (this.$route.query.user === undefined || (this.$route.query.token === undefined && !this.$route.query.totp)) {
+    this.type = this.$route.query.type ?? "totp"
+    if (
+      this.$route.query.user === undefined ||
+      !["totp", "mail"].includes(this.type) || (
+        this.type === "mail" && this.$route.query.token === undefined
+    )) {
       this.$awn.alert(this.$t("unlock.bad_link"), this.toasterLabels);
       this.$router.push("/")
     } else {
       this.form.username = this.$route.query.user
       this.form.authentication.token = this.$route.query.token === undefined ? "" : this.$route.query.token
-      this.totp = !!this.$route.query.totp
     }
   },
 
@@ -69,7 +73,7 @@ export default {
             id="input-1"
             class="form-control"
             type="text"
-            :disabled="!totp"
+            :disabled="type !== 'totp'"
             v-model="form.username"
         />
       </b-form-group>
@@ -101,7 +105,7 @@ export default {
         />
       </b-form-group>
 
-      <b-form-group v-if="totp"
+      <b-form-group v-if="type === 'totp'"
                     id="input-group-5"
                     :label="$t('modal.input.totp')"
                     label-for="input-5">

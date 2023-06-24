@@ -31,7 +31,11 @@ const messages = {
                 "error_on_revoke": "Une erreur est survenue en révoquant votre OTP.",
             },
             "verify_totp": "Vérifier mon OTP",
-            "revoke_totp": "Révoquer mon OTP",
+            "revoke_modal": {
+                "request_sent": "Votre demande a été traitée. Consultez votre boîte mail.",
+                "request_error": "Une erreur est survenue lors du traitement de votre demande.",
+                "title": "Révoquer mon OTP",
+            },
             "unlock_modal": {
                 "request_sent": "Votre demande a été traitée. Consultez votre boîte mail.",
                 "request_error": "Une erreur est survenue lors du traitement de votre demande.",
@@ -55,6 +59,7 @@ const messages = {
             "respect_password_info": "<b>Rappel</b> : Pensez à respecter les règles de sécurité de votre organisation.",
             "send_email": "Envoyer un email",
             "use_totp": "Utiliser un code OTP",
+            "use_password": "Utiliser le mot de passe",
             "input": {
                 "username": "Nom d'utilisateur : ",
                 "old_password":"Ancien mot de passe : ",
@@ -118,7 +123,11 @@ const messages = {
             "totp_tooltip": "Enable a OTP allows you to reinitialize or unlock your account without using emails.",
             "create_totp": "Create my OTP",
             "verify_totp": "Verify my OTP",
-            "revoke_totp": "Revoke my OTP",
+            "revoke_modal": {
+                "request_sent": "An email is on the way! Please check your mailbox.",
+                "request_error": "Sorry, an error occurred.",
+                "title": "Revoke my OTP",
+            },
             "unlock_modal": {
                 "request_sent": "An email is on the way! Please check your mailbox.",
                 "request_error": "Sorry, an error occurred.",
@@ -141,6 +150,7 @@ const messages = {
             "close": "Fermer",
             "send_email": "Send an email",
             "use_totp": "Use a OTP code",
+            "use_password": "Use password",
             "respect_password_info": "<b>Remember</b>: You must respect the policy security enforced by your IT Team.",
             "input": {
                 "username": "Username:",
