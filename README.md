@@ -21,13 +21,27 @@ provider for openssl : `export NODE_OPTIONS=--openssl-legacy-provider`
 # Run (for large-scale production)
 
 As you noticed, our Docker image and the precedent method for manual-run is not quite efficient : we
-are keeping a node process running, serving our content. This is why we highly recommend you to :
+are keeping a node process running, serving our content. This is why we highly recommend you to run
+using one of the following methods.
+
+## Run nginx locally
 
 - Build with `npm run build`
 - And use another web server (eg: nginx) to serve files
 
 The main (and only) drawback is that you cannot set "on the fly" the backend url anymore, you have to define it
 before the build phase. That's why we are not providing such images, even if we're using it in our company.
+
+## Build nginx docker image
+
+This requires you to build the docker image yourself and provide the `VUE_APP_BACKEND` variable
+when building the image. You cannot change this value unless you rebuild the docker image.
+
+```sh
+docker build -f Dockerfile.nginx -t dory-front --build-arg VUE_APP_BACKEND=https://your_backend_address/ .
+```
+
+You can then run the docker image using e.g. `docker run --name dory-front -p 8000:8000 dory-front`.
 
 # License
 
