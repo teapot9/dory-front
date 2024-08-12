@@ -1,0 +1,20 @@
+FROM node:16-alpine AS builder
+
+ARG VUE_APP_BACKEND
+ENV VUE_APP_BACKEND=${VUE_APP_BACKEND}
+RUN test -n "${VUE_APP_BACKEND}"
+
+WORKDIR /build
+COPY . .
+
+RUN npm install
+RUN npm run build
+
+FROM nginxinc/nginx-unprivileged:1-alpine
+
+COPY --from=builder /build/dist /usr/share/nginx/html
+COPY --chmod=0644 docker/nginx.conf /etc/nginx/conf.d/default.conf
+
+USER nobody
+
+# vim: ft=dockerfile
