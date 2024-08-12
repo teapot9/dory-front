@@ -4,11 +4,10 @@ import ChangePasswordModal from "./changePasswordModal";
 import toaster from "@/components/mixins/toaster";
 import create_totp from "@/components/landing/create_totp";
 import check_totp from "@/components/landing/check_totp";
-import revoke_totp from "@/components/landing/revoke_totp";
 
 export default {
   mixins: [toaster],
-  components: {revoke_totp, check_totp, create_totp, AskModal, ChangePasswordModal},
+  components: {check_totp, create_totp, AskModal, ChangePasswordModal},
   data() {
     return {
       features: {
@@ -92,17 +91,17 @@ export default {
         </b-jumbotron>
         <b-jumbotron v-on:click="revokeTOTP()">
           <i class="fas fa-trash-alt"></i>
-          <h1>{{ $t('landing.revoke_totp') }}</h1>
+          <h1>{{ $t('landing.revoke_modal.title') }}</h1>
         </b-jumbotron>
       </div>
     </div>
 
-    <ask-modal ref="unlock" method="unlock" :totp="!features.disable_totp"></ask-modal>
-    <ask-modal ref="reset" method="reinitialize" :totp="!features.disable_totp"></ask-modal>
+    <ask-modal ref="unlock" method="unlock" :totp="!features.disable_totp" :password="false"></ask-modal>
+    <ask-modal ref="reset" method="reinitialize" :totp="!features.disable_totp" :password="false"></ask-modal>
     <create_totp ref="create_totp"></create_totp>
     <change-password-modal ref="change"></change-password-modal>
     <check_totp ref="check_totp"></check_totp>
-    <revoke_totp ref="revoke_totp"></revoke_totp>
+    <ask-modal ref="revoke_totp" method="revoke" :totp="false" :password="true"></ask-modal>
 
   </div>
 </template>
